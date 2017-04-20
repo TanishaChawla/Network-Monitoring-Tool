@@ -262,7 +262,7 @@ if ($value=="UDP")
 
 
 }
-else
+if($value=="ARP")
 {
 	        echo "<h5>ARP</h5><br>";
 
