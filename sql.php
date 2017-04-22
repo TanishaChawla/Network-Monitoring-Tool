@@ -28,7 +28,7 @@ session_start();
 						$_SESSION["username"]=$user;
 						$_SESSION["password"]=$password;
 						echo "hello<br>";
-						$script=shell_exec('sudo ./script.sh');
+						$script=shell_exec('./script.sh');
 						echo $script;
 						echo "script run";
 						header('Refresh: 10, URL="display.php"');

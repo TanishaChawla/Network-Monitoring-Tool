@@ -299,9 +299,9 @@
                         }
                         fclose($length);
                     }
-                    if($selected=="sourceport"
+                    if($selected=="sourceport")
                     {
-                        echo "not available"
+                        echo "not available";
                     }
                     if($selected=="destinationport")
                     {
