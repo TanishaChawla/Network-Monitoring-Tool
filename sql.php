@@ -30,6 +30,7 @@ session_start();
 						echo "hello<br>";
 						$script=shell_exec('./script.sh');
 						echo $script;
+						echo "script run";
 						header('Refresh: 10, URL="display.php"');
 					}
 					else
