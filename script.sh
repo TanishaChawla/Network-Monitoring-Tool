@@ -1,6 +1,7 @@
 #! /bin/bash
 #extracting packets
 tcpdump -n -c 100 > files/dump
+echo "hello from the script file"
 grep "IP\s" files/dump > files/tcp
 grep "UDP" files/dump > files/udp
 grep "ARP" files/dump > files/ar
@@ -33,7 +34,7 @@ cut -d " " -f5 files/tcp_2 >> files/tcp_dest
 cut -d ":" -f1 files/tcp_dest > files/tcp_destination
 cut -d "(" -f2 files/tcp_2 >files/tcp_l
 cut -d ")" -f1 files/tcp_2 >>files/tcp_length
-cut -d "." -f1,2,3,4 files/tcp_source>files/files/tcp_srcadd
+cut -d "." -f1,2,3,4 files/tcp_source>files/tcp_srcadd
 cut -d "." -f5 files/tcp_source >files/tcp_srcport
 cut -d "." -f1,2,3,4 files/tcp_destination>files/tcp_dstadd
 cut -d "." -f5 files/tcp_destination > files/tcp_dstport
@@ -41,7 +42,7 @@ cut -d "." -f5 files/tcp_destination > files/tcp_dstport
 grep "BROADCAST" files/udp > files/udp1
 grep "length" files/udp > files/udp2
 
-cut -d " " -f1 files/udp1 > fiels/udp_time
+cut -d " " -f1 files/udp1 > files/udp_time
 cut -d " " -f3 files/udp1 > files/udp_source
 cut -d " " -f5 files/udp1 > files/udp_destination
 cut -d "(" -f2 files/udp1>files/udp_l

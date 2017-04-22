@@ -14,33 +14,35 @@ session_start();
 			$user=$_POST["username"];
 			$password=$_POST["password"];
 			$sql="select password from users where username='".$user."'";
+			echo $sql."<br>";
 			$result=mysqli_query($conn,$sql);
 			if(mysqli_num_rows($result)>0)
 			{
 				while($row=mysqli_fetch_assoc($result))
 				{
-					
+
 					if($row["password"]==$password)
 					{
-						echo "correct credentials<br>";
-						echo "<a href='logout.php'>Logout</a>";
+						echo "correct credentials</br>";
+						echo "<a href='logout.php'>Logout</a><br>";
 						$_SESSION["username"]=$user;
 						$_SESSION["password"]=$password;
+						echo "hello<br>";
 						$script=shell_exec('./script.sh');
 						echo $script;
-						header('Refresh: 0, URL="display.php"');
+						header('Refresh: 10, URL="display.php"');
 					}
 					else
 					{
 						echo "wrong credentials<br>";
-						header('Refresh: 1,URL="/"');
+						header('Refresh: 10,URL="/Network-Monitoring-Tool/"');
 					}
 				}
 			}
 			else
 			{
 				echo "wrong credentials<br>";
-				header('Refresh: 1,URL="/"');
+				header('Refresh: 10,URL="/Network-Monitoring-Tool/"');
 			}
 		}
 	}

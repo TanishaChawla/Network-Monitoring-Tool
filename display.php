@@ -8,7 +8,7 @@
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" media="screen,projection" />
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-        
+
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -67,7 +67,7 @@ if($value=="TCP")
 	echo "<h5>TCP</h5><br>";
 	if($selected=="timestamp")
 	{
-		$time=fopen("tcp_time","r");
+		$time=fopen("files/tcp_time","r");
 		while(!feof($time))
 		{
 			echo fgets($time)."<br>";
@@ -76,7 +76,7 @@ if($value=="TCP")
 	}
 	if($selected=="sourceaddress")
 	{
-		 $srcadd=fopen("tcp_srcadd","r");
+		 $srcadd=fopen("files/tcp_srcadd","r");
                 while(!feof($srcadd))
                 {
                         echo fgets($srcadd)."<br>";
@@ -85,7 +85,7 @@ if($value=="TCP")
 	}
 	if($selected=="destinationaddress")
 	{
-		 $dstadd=fopen("tcp_dstadd","r");
+		 $dstadd=fopen("files/tcp_dstadd","r");
                 while(!feof($dstadd))
                 {
                         echo fgets($dstadd)."<br>";
@@ -94,7 +94,7 @@ if($value=="TCP")
 	}
 	if($selected=="length")
 	{
-		 $length=fopen("tcp_length","r");
+		 $length=fopen("files/tcp_length","r");
                 while(!feof($length))
                 {
                         echo fgets($length)."<br>";
@@ -103,7 +103,7 @@ if($value=="TCP")
 	}
 	if($selected=="sourceport")
 	{
-		 $srcport=fopen("tcp_srcport","r");
+		 $srcport=fopen("files/tcp_srcport","r");
                 while(!feof($srcport))
                 {
                         echo fgets($srcport)."<br>";
@@ -112,7 +112,7 @@ if($value=="TCP")
 	}
 	if($selected=="destinationport")
 	{
-		 $dstport=fopen("tcp_dstport","r");
+		 $dstport=fopen("files/tcp_dstport","r");
                 while(!feof($dstport))
                 {
                         echo fgets($dstport)."<br>";
@@ -121,7 +121,7 @@ if($value=="TCP")
 	}
 	if($selected=="sourcemac")
 	{
-		$srcmac=fopen("tcp_srcmac","r");
+		$srcmac=fopen("files/tcp_srcmac","r");
                 while(!feof($srcmac))
                 {
                         echo fgets($srcmac)."<br>";
@@ -130,7 +130,7 @@ if($value=="TCP")
 	}
 	if($selected=="destinationmac")
 	{
-		 $dstmac=fopen("tcp_dstmac","r");
+		 $dstmac=fopen("files/tcp_dstmac","r");
                 while(!feof($dstmac))
                 {
                         echo fgets($dstmac)."<br>";
@@ -139,12 +139,12 @@ if($value=="TCP")
 	}
 	if($selected=="all")
 	{
-		 $time=fopen("tcp_time","r");
-		$srcadd=fopen("tcp_srcadd","r");
-		$dstadd=fopen("tcp_dstadd","r");
-		$srcport=fopen("tcp_srcport","r");
-		$dstport=fopen("tcp_dstport","r");
-		$length=fopen("tcp_length","r");
+		 $time=fopen("files/tcp_time","r");
+		$srcadd=fopen("files/tcp_srcadd","r");
+		$dstadd=fopen("files/tcp_dstadd","r");
+		$srcport=fopen("files/tcp_srcport","r");
+		$dstport=fopen("files/tcp_dstport","r");
+		$length=fopen("files/tcp_length","r");
 		echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th></tr></thead>";
 		while(!feof($time))
 		{
@@ -166,7 +166,7 @@ if ($value=="UDP")
 
 	if($selected=="timestamp")
         {
-                $time=fopen("udp_time","r");
+                $time=fopen("files/udp_time","r");
                 while(!feof($time))
                 {
                         echo fgets($time)."<br>";
@@ -175,7 +175,7 @@ if ($value=="UDP")
         }
         if($selected=="sourceaddress")
         {
-                 $srcadd=fopen("udp_srcadd","r");
+                 $srcadd=fopen("files/udp_srcadd","r");
                 while(!feof($srcadd))
                 {
                         echo fgets($srcadd)."<br>";
@@ -184,7 +184,7 @@ if ($value=="UDP")
         }
         if($selected=="destinationaddress")
         {
-                 $dstadd=fopen("udp_dstadd","r");
+                 $dstadd=fopen("files/udp_dstadd","r");
                 while(!feof($dstadd))
                 {
                         echo fgets($dstadd)."<br>";
@@ -193,7 +193,7 @@ if ($value=="UDP")
         }
         if($selected=="length")
         {
-                 $length=fopen("udp_length","r");
+                 $length=fopen("files/udp_length","r");
                 while(!feof($length))
                 {
 			echo fgets($length)."<br>";
@@ -202,7 +202,7 @@ if ($value=="UDP")
         }
         if($selected=="sourceport")
         {
-                 $srcport=fopen("udp_srcport","r");
+                 $srcport=fopen("files/udp_srcport","r");
                 while(!feof($srcport))
                 {
                         echo fgets($srcport)."<br>";
@@ -211,7 +211,7 @@ if ($value=="UDP")
         }
         if($selected=="destinationport")
         {
-                 $dstport=fopen("udp_dstport","r");
+                 $dstport=fopen("files/udp_dstport","r");
                 while(!feof($dstport))
                 {
                         echo fgets($dstport)."<br>";
@@ -220,7 +220,7 @@ if ($value=="UDP")
         }
         if($selected=="sourcemac")
         {
-                 $srcmac=fopen("udp_srcmac","r");
+                 $srcmac=fopen("files/udp_srcmac","r");
                 while(!feof($srcmac))
                 {
                         echo fgets($srcmac)."<br>";
@@ -229,7 +229,7 @@ if ($value=="UDP")
         }
         if($selected=="destinationmac")
         {
-                 $dstmac=fopen("udp_dstmac","r");
+                 $dstmac=fopen("files/udp_dstmac","r");
                 while(!feof($dstmac))
                 {
                         echo fgets($dstmac)."<br>";
@@ -238,12 +238,12 @@ if ($value=="UDP")
 	}
 	if($selected=="all")
         {
-                 $time=fopen("udp_time","r");
-                $srcadd=fopen("udp_srcadd","r");
-                $dstadd=fopen("udp_dstadd","r");
-                $srcport=fopen("udp_srcport","r");
-                $dstport=fopen("udp_dstport","r");
-                $length=fopen("udp_length","r");
+                 $time=fopen("files/udp_time","r");
+                $srcadd=fopen("files/udp_srcadd","r");
+                $dstadd=fopen("files/udp_dstadd","r");
+                $srcport=fopen("files/udp_srcport","r");
+                $dstport=fopen("files/udp_dstport","r");
+                $length=fopen("files/udp_length","r");
                 echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th></tr></thead>";
                 while(!feof($time))
                 {
@@ -268,7 +268,7 @@ if($value=="ARP")
 
 	if($selected=="timestamp")
         {
-                $time=fopen("arp_time","r");
+                $time=fopen("files/arp_time","r");
                 while(!feof($time))
                 {
                         echo fgets($time)."<br>";
@@ -277,7 +277,7 @@ if($value=="ARP")
         }
         if($selected=="sourceaddress")
         {
-                 $srcadd=fopen("arp_srcadd","r");
+                 $srcadd=fopen("files/arp_srcadd","r");
                 while(!feof($srcadd))
                 {
                         echo fgets($srcadd)."<br>";
@@ -286,7 +286,7 @@ if($value=="ARP")
         }
         if($selected=="destinationaddress")
         {
-                 $dstadd=fopen("arp_dstadd","r");
+                 $dstadd=fopen("files/arp_dstadd","r");
                 while(!feof($dstadd))
                 {
                         echo fgets($dstadd)."<br>";
@@ -295,7 +295,7 @@ if($value=="ARP")
         }
         if($selected=="length")
         {
-                 $length=fopen("arp_length","r");
+                 $length=fopen("files/arp_length","r");
                 while(!feof($length))
                 {
                         echo fgets($length)."<br>";
@@ -312,7 +312,7 @@ if($value=="ARP")
         }
         if($selected=="sourcemac")
         {
-                 $srcmac=fopen("arp_srcmac","r");
+                 $srcmac=fopen("files/arp_srcmac","r");
                 while(!feof($srcmac))
                 {
                         echo fgets($srcamc)."<br>";
@@ -321,7 +321,7 @@ if($value=="ARP")
         }
         if($selected=="destinationmac")
         {
-                 $dstmac=fopen("arp_dstmac","r");
+                 $dstmac=fopen("files/arp_dstmac","r");
                 while(!feof($time))
                 {
                         echo fgets($dstmac)."<br>";
@@ -330,10 +330,10 @@ if($value=="ARP")
         }
 	if($selected=="all")
         {
-                 $time=fopen("arp_time","r");
-                $srcadd=fopen("arp_srcadd","r");
-                $dstadd=fopen("arp_dstadd","r");
-                $length=fopen("arp_length","r");
+                 $time=fopen("files/arp_time","r");
+                $srcadd=fopen("files/arp_srcadd","r");
+                $dstadd=fopen("files/arp_dstadd","r");
+                $length=fopen("files/arp_length","r");
                 echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Length</th></tr></thead>";
                 while(!feof($time))
                 {
