@@ -46,10 +46,10 @@
         </style>
     </head>
     <body>
-        <a href="logout.php" class="logout">Logout</a>
+        <a href="/logout.php" class="logout">Logout</a>
         <div class="container">
 
-            <h4>Capturing Packets</h4>
+            <h4>Monitoring Packets</h4>
             <form method="post" action="" class="card z-depth-1">
                 <label>Number of packets to be captured</label><br>
                 <input type="number" name="packet_count" value="10"><br>
@@ -90,7 +90,19 @@
                fclose($handle);
                echo 'ADP: '.$linecount.'<br>';
            }
+           
+           if(isset($_POST["submit-block"]))
+           {
+               $block = $_POST["block-request"];
+               echo "BLOCKED THE SOURCE - ".$block;
+               $blocked=fopen("blocked.txt","a+");
+               fwrite($blocked,$block."\n");
+               fclose($blocked);
+               $script=shell_exec('sudo ufw deny from '.$block);
+               echo '<br>'.$script;
+               echo '<br>To unblock visit <a href="/block-status.php">This</a> page.';
 
+           }
            if(isset($_POST["submit-before"]))
            {
                $count = $_POST["packet_count"];
@@ -209,10 +221,12 @@
                         $srcport=fopen("files/tcp_srcport","r");
                         $dstport=fopen("files/tcp_dstport","r");
                         $length=fopen("files/tcp_length","r");
-                        echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th></tr></thead>";
+                        echo "<table class='striped'>
+                            <thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th><th>Block</th></tr></thead>";
                         while(!feof($time))
                         {
-                            echo "<tr><td>".fgets($time)."</td><td>".fgets($srcadd)."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td></tr>";
+                            $srcaddressTCP = fgets($srcadd);
+                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressTCP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressTCP." name='block-request'><button type='submit' name='submit-block'>X</button></form></td></tr>";
                         }
                         echo "</table>";
                         fclose($time);
@@ -307,10 +321,11 @@
                         $srcport=fopen("files/udp_srcport","r");
                         $dstport=fopen("files/udp_dstport","r");
                         $length=fopen("files/udp_length","r");
-                        echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th></tr></thead>";
+                        echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th><th>Block</th></tr></thead>";
                         while(!feof($time))
                         {
-                            echo "<tr><td>".fgets($time)."</td><td>".fgets($srcadd)."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td></tr>";
+                            $srcaddressARP = fgets($srcadd);
+                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressARP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressARP." name='block-request'><button type='submit' name='submit-block'>X</button></form></td></tr>";
 
                         }
                         echo "</table>";
@@ -395,10 +410,11 @@
                         $srcadd=fopen("files/arp_srcadd","r");
                         $dstadd=fopen("files/arp_dstadd","r");
                         $length=fopen("files/arp_length","r");
-                        echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Length</th></tr></thead>";
+                        echo "<table class='striped'><thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Length</th><th>Block</th></tr></thead>";
                         while(!feof($time))
                         {
-                            echo "<tr><td>".fgets($time)."</td><td>".fgets($srcadd)."</td><td>".fgets($dstadd)."</td><td>".fgets($length)."</td></tr>";
+                            $srcaddressUDP = fgets($srcadd);
+                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressUDP."</td><td>".fgets($dstadd)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressUDP." name='block-request'><button type='submit' name='submit-block'>X</button></form></td></tr>";
                         }
                         echo "</table>";
                         fclose($time);
@@ -410,5 +426,17 @@
                 echo '<script>document.getElementById("loading").style.display="none";</script>';
             }?>
         </div>
+
+        <script>
+
+            function removeSource(sourceAddress){
+                if(sourceAddress=="")alert('No source available');
+                else{
+                    
+                }
+            }
+
+        </script>
+
     </body>
 </html>
