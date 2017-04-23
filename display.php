@@ -31,6 +31,18 @@
             h4{
                 font-family:'Open Sans',sans-serif;
             }
+            .loader {
+                border: 8px solid #f3f3f3; /* Light grey */
+                border-top: 8px solid #26a69a; /* Blue */
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 2s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
         </style>
     </head>
     <body>
@@ -42,6 +54,7 @@
                 <label>Number of packets to be captured</label><br>
                 <input type="number" name="packet_count" value="10"><br>
                 <button class="waves-effect waves-light btn" type="submit" name="submit-before">Submit</button>
+                <div class="center" style="padding-top:25px;"><div id="loading" class="loader"></div></div>
             </form>
 
             
@@ -104,7 +117,8 @@
                     </select><br>
                     <button class="waves-effect waves-light btn" type="submit" name="submit">Submit</button>
                 </form>
-           </div>';
+                </div>
+                <script>document.getElementById("loading").style.display="none";</script>';
                
            }
            if(isset($_POST["submit"]))
@@ -393,6 +407,7 @@
                         fclose($length);
                     }
                 }
+                echo '<script>document.getElementById("loading").style.display="none";</script>';
             }?>
         </div>
     </body>
