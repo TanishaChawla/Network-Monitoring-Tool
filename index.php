@@ -16,10 +16,10 @@
 	padding: 5%;}
 	</style>
 </head>
-<body>
-<h2 class="center">Network Monitoring Tool</h2>
+<body style="background-color:#232830">
+<h2 class="center" style="color:white;">Network Monitoring Tool</h2>
 <div class="container">
-<form action="sql.php" class="card z-depth-1" method="post">
+<form action="sql.php" class="card z-depth-1" method="post" style="background-color:#2C323C">
 <label id="user">Username</label>
 <input id="user" name="username" required type="text"/><br>
 <label id="pass">Password</label>
