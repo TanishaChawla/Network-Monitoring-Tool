@@ -14,8 +14,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <style>
-        .card{
-            padding: 5%;}
+            .card{
+                padding: 5%;
+            }
             [type="radio"]:not(:checked), [type="radio"]:checked {
                 position: relative;
                 left: 0px;
@@ -32,8 +33,8 @@
                 font-family:'Open Sans',sans-serif;
             }
             .loader {
-                border: 8px solid #f3f3f3; /* Light grey */
-                border-top: 8px solid #26a69a; /* Blue */
+                border: 8px solid #232830;
+                border-top: 8px solid #26a69a;
                 border-radius: 50%;
                 width: 50px;
                 height: 50px;
@@ -43,21 +44,36 @@
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
+            footer{
+                margin-bottom: 0;
+                bottom: 0;
+                position: fixed;
+                width: 100%;
+                height: 50px;
+                z-index: 2;
+            }
+            table{
+                background-color:#2C323C;
+                color:white;
+            }
+            .striped>tbody>tr:nth-child(odd)>td, 
+            .striped>tbody>tr:nth-child(odd)>th {
+                background-color: #353c48;
+            }
+
         </style>
     </head>
-    <body>
-        <a href="/logout.php" class="logout">Logout</a>
-        <div class="container">
-
+    <body style="background-color:#232830">
+        <h2 class="center" style="color:white;">Network Monitoring Tool</h2>
+        <div class="container" style="color:white;">
             <h4>Monitoring Packets</h4>
-            <form method="post" action="" class="card z-depth-1">
+            <form method="post" action="" class="card z-depth-1" style="background-color:#2C323C">
                 <label>Number of packets to be captured</label><br>
                 <input type="number" name="packet_count" value="10"><br>
                 <button class="waves-effect waves-light btn" type="submit" name="submit-before">Submit</button>
                 <div class="center" style="padding-top:25px;"><div id="loading" class="loader"></div></div>
             </form>
 
-            
            <?php
            function countCalc(){
                $file="files/tcp";
@@ -111,12 +127,12 @@
                countCalc();
                echo '<div id="formPacketType">
                 <h4>Select the type of Packet</h4>
-                <form method="post" action="" class="card z-depth-1">
-                    <input type="radio" name="packet" value="TCP" onclick="change">TCP<br>
-                    <input type="radio" name="packet" value="UDP" onclick="change">UDP<br>
-                    <input type="radio" name="packet" value="ARP" onclick="change" checked>ARP<br>
+                <form method="post" action="" class="card z-depth-1" style="background-color:#2C323C">
+                    <input type="radio" name="packet" value="TCP" onclick="change"> TCP<br>
+                    <input type="radio" name="packet" value="UDP" onclick="change"> UDP<br>
+                    <input type="radio" name="packet" value="ARP" onclick="change"> ARP<br>
                     <br>
-                    <select name="dropdown">
+                    <select name="dropdown" style="background-color:#2C323C">
                         <option value="timestamp">Timestamp</option>
                         <option value="sourceaddress">Source Address</option>
                         <option value="destinationaddress">Destination Address</option>
@@ -226,7 +242,7 @@
                         while(!feof($time))
                         {
                             $srcaddressTCP = fgets($srcadd);
-                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressTCP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressTCP." name='block-request'><button type='submit' name='submit-block'>X</button></form></td></tr>";
+                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressTCP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressTCP." name='block-request'><button type='submit' class='waves-effect waves-light btn' name='submit-block'>X</button></form></td></tr>";
                         }
                         echo "</table>";
                         fclose($time);
@@ -427,16 +443,18 @@
             }?>
         </div>
 
-        <script>
+        <br><br><br>
 
-            function removeSource(sourceAddress){
-                if(sourceAddress=="")alert('No source available');
-                else{
-                    
-                }
-            }
-
-        </script>
+        <footer style="background-color:#3a4556;box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.3);">
+            <div class="container" style="color:white;">
+                <div class="row">
+                    <div class="col s1 m1 l2" style="padding:12px;">Home</div>
+                    <div class="col s1 m1 l2" style="padding:12px;">Block Status</div>
+                    <div class="col s1 m1 l2" style="padding:12px;">Source Comparison</div>
+                    <div class="right" style="padding:12px;"><a href="logout.php">Logout</a></div>
+                </div>
+            </div>
+        </footer>
 
     </body>
 </html>
