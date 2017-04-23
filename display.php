@@ -33,11 +33,11 @@
                 font-family:'Open Sans',sans-serif;
             }
             .loader {
-                border: 8px solid #232830;
-                border-top: 8px solid #26a69a;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
+                border: 2px solid #232830;
+                border-top: 2px solid #26a69a;
+                border-radius: 100%;
+                width: 25px;
+                height: 25px;
                 animation: spin 2s linear infinite;
             }
             @keyframes spin {
@@ -65,17 +65,17 @@
     </head>
     <body style="background-color:#232830">
         <h2 class="center" style="color:white;">Network Monitoring Tool</h2>
-        <div class="container" style="color:white;">
-            <h4>Monitoring Packets</h4>
+        <div class="container center" style="color:white;">
+            <h4>Monitoring Packets</h4><br>
             <form method="post" action="" class="card z-depth-1" style="background-color:#2C323C">
                 <label>Number of packets to be captured</label><br>
                 <input type="number" name="packet_count" value="10"><br>
                 <button class="waves-effect waves-light btn" type="submit" name="submit-before">Submit</button>
-                <div class="center" style="padding-top:25px;"><div id="loading" class="loader"></div></div>
-            </form>
-
+                <div class="center" style="padding-top:25px;text-align:center"><div id="loading" class="loader" style="display: inline-block;"></div></div>
            <?php
            function countCalc(){
+               echo '<br><h5>Captured Packets</h5>';
+               echo '<table style="background-color:#e26161"class="center z-depth-1"><tr>';
                $file="files/tcp";
                $linecount = -1;
                $handle = fopen($file, "r");
@@ -84,7 +84,7 @@
                    $linecount++;
                }
                fclose($handle);
-               echo 'TCP: '.$linecount.'<br>';
+               echo '<td style="text-align:center"><strong>TCP: '.$linecount.'</strong></td>';
 
                $file="files/udp";
                $linecount = -1;
@@ -94,7 +94,7 @@
                    $linecount++;
                }
                fclose($handle);
-               echo 'UDP: '.$linecount.'<br>';
+               echo '<td style="text-align:center"><strong>UDP: '.$linecount.'</strong></td>';
 
                $file="files/arp";
                $linecount = -1;
@@ -104,7 +104,9 @@
                    $linecount++;
                }
                fclose($handle);
-               echo 'ADP: '.$linecount.'<br>';
+               echo '<td style="text-align:center"><strong>ADP: '.$linecount.'</strong></td>';
+               echo '</tr></table>';
+               echo '</form>';
            }
            
            if(isset($_POST["submit-block"]))
@@ -116,8 +118,7 @@
                fclose($blocked);
                $script=shell_exec('sudo ufw deny from '.$block);
                echo '<br>'.$script;
-               echo '<br>To unblock visit <a href="/block-status.php">This</a> page.';
-
+               echo '<br>To unblock visit <a href="status.php">This</a> page.';
            }
            if(isset($_POST["submit-before"]))
            {
@@ -128,23 +129,33 @@
                echo '<div id="formPacketType">
                 <h4>Select the type of Packet</h4>
                 <form method="post" action="" class="card z-depth-1" style="background-color:#2C323C">
-                    <input type="radio" name="packet" value="TCP" onclick="change"> TCP<br>
-                    <input type="radio" name="packet" value="UDP" onclick="change"> UDP<br>
-                    <input type="radio" name="packet" value="ARP" onclick="change"> ARP<br>
+                    <div class="row">
+                        <div class="col s6 m6 l6">
+                            <input type="radio" name="packet" value="TCP" onclick="change" style="margin:30px;"> TCP
+                            <input type="radio" name="packet" value="UDP" onclick="change" style="margin:30px;"> UDP
+                            <input type="radio" name="packet" value="ARP" onclick="change" style="margin:30px;"> ARP
+                        </div>
+                    <div>
                     <br>
-                    <select name="dropdown" style="background-color:#2C323C">
-                        <option value="timestamp">Timestamp</option>
-                        <option value="sourceaddress">Source Address</option>
-                        <option value="destinationaddress">Destination Address</option>
-                        <option value="sourceport">Source Port</option>
-                        <option value="destinationport">Destination Port</option>
-                        <option value="sourcemac">Source MAC</option>
-                        <option value="destinationmac">Destination MAC</option>
-                        <option value="length">Length</option>
-                        <option value="all">All</option>
-                    </select><br>
+                    <div class="row">
+                        <div class="col s6 m6 l6">
+                            <select name="dropdown" style="background-color:#2C323C">
+                                <option value="timestamp">Timestamp</option>
+                                <option value="sourceaddress">Source Address</option>
+                                <option value="destinationaddress">Destination Address</option>
+                                <option value="sourceport">Source Port</option>
+                                <option value="destinationport">Destination Port</option>
+                                <option value="sourcemac">Source MAC</option>
+                                <option value="destinationmac">Destination MAC</option>
+                                <option value="length">Length</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+                    </div>
                     <button class="waves-effect waves-light btn" type="submit" name="submit">Submit</button>
                 </form>
+                </div>
+                </div>
                 </div>
                 <script>document.getElementById("loading").style.display="none";</script>';
                
@@ -153,7 +164,7 @@
            {
                 $value=$_POST["packet"];
                 $selected=$_POST["dropdown"];
-                echo "<hr>";
+                echo "<br><br>";
                 if($value=="TCP")
                 {
                     echo "<h5>TCP</h5><br>";
@@ -238,11 +249,13 @@
                         $dstport=fopen("files/tcp_dstport","r");
                         $length=fopen("files/tcp_length","r");
                         echo "<table class='striped'>
-                            <thead><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th><th>Block</th></tr></thead>";
+                            <thead style='background-color:#e26161'><tr><th>Timestamp</th><th>Source Address</th><th>Destination Address</th><th>Source Port</th><th>Destination Port</th><th>Length</th><th>Block</th></tr></thead>";
                         while(!feof($time))
                         {
                             $srcaddressTCP = fgets($srcadd);
-                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressTCP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressTCP." name='block-request'><button type='submit' class='waves-effect waves-light btn' name='submit-block'>X</button></form></td></tr>";
+                            if($srcaddressTCP!="")$form = "<td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressTCP." name='block-request'><button type='submit' class='waves-effect waves-light btn' name='submit-block'>X</button></form></td></tr>";
+                            else $form="<td></td></tr>";
+                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressTCP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td>".$form;
                         }
                         echo "</table>";
                         fclose($time);
@@ -341,7 +354,9 @@
                         while(!feof($time))
                         {
                             $srcaddressARP = fgets($srcadd);
-                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressARP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressARP." name='block-request'><button type='submit' name='submit-block'>X</button></form></td></tr>";
+                            if($srcaddressARP!="")$form = "<td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressARP." name='block-request'><button type='submit' class='waves-effect waves-light btn' name='submit-block'>X</button></form></td></tr>";
+                            else $form="<td></td></tr>";
+                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressARP."</td><td>".fgets($dstadd)."</td><td>".fgets($srcport)."</td><td>".fgets($dstport)."</td><td>".fgets($length)."</td>".$form;
 
                         }
                         echo "</table>";
@@ -430,7 +445,9 @@
                         while(!feof($time))
                         {
                             $srcaddressUDP = fgets($srcadd);
-                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressUDP."</td><td>".fgets($dstadd)."</td><td>".fgets($length)."</td><td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressUDP." name='block-request'><button type='submit' name='submit-block'>X</button></form></td></tr>";
+                            if($srcaddressUDP!="")$form = "<td><form action = './display.php' method='POST'><input hidden type='text' value=".$srcaddressUDP." name='block-request'><button type='submit' class='waves-effect waves-light btn' name='submit-block'>X</button></form></td></tr>";
+                            else $form = "<td></td></tr>";
+                            echo "<tr><td>".fgets($time)."</td><td>".$srcaddressUDP."</td><td>".fgets($dstadd)."</td><td>".fgets($length)."</td>.$form";
                         }
                         echo "</table>";
                         fclose($time);
@@ -448,13 +465,17 @@
         <footer style="background-color:#3a4556;box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.3);">
             <div class="container" style="color:white;">
                 <div class="row">
-                    <div class="col s1 m1 l2" style="padding:12px;">Home</div>
-                    <div class="col s1 m1 l2" style="padding:12px;">Block Status</div>
-                    <div class="col s1 m1 l2" style="padding:12px;">Source Comparison</div>
-                    <div class="right" style="padding:12px;"><a href="logout.php">Logout</a></div>
+                    <a href="" style="display:block;color:white;"><div id="homeSelector" class="col s3 m1 l1 center" style="padding:14px;">Home</div></a>
+                    <a href="status.php" style="display:block;color:white;"><div id="statusSelector" class="col s3 m1 l1 center" style="padding:14px;">Status</div></a>
+                    <a href="source-comparison.php" style="display:block;color:white;"><div id="scSelector" class="col s3 m1 l3" style="padding:14px;">Source Comparison</div></a>
+                    <div class="right" style="padding:14px;color:"><a href="logout.php">Logout</a></div>
                 </div>
             </div>
         </footer>
+
+        <script>
+            document.getElementById("homeSelector").style.background="#26a69a";
+        </script>
 
     </body>
 </html>
