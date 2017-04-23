@@ -46,11 +46,44 @@
 
             
            <?php
+           function countCalc(){
+               $file="files/tcp";
+               $linecount = -1;
+               $handle = fopen($file, "r");
+               while(!feof($handle)){
+                   $line = fgets($handle);
+                   $linecount++;
+               }
+               fclose($handle);
+               echo 'TCP: '.$linecount.'<br>';
+
+               $file="files/udp";
+               $linecount = -1;
+               $handle = fopen($file, "r");
+               while(!feof($handle)){
+                   $line = fgets($handle);
+                   $linecount++;
+               }
+               fclose($handle);
+               echo 'UDP: '.$linecount.'<br>';
+
+               $file="files/arp";
+               $linecount = -1;
+               $handle = fopen($file, "r");
+               while(!feof($handle)){
+                   $line = fgets($handle);
+                   $linecount++;
+               }
+               fclose($handle);
+               echo 'ADP: '.$linecount.'<br>';
+           }
+
            if(isset($_POST["submit-before"]))
            {
                $count = $_POST["packet_count"];
                $script=shell_exec('sudo ./script.sh '.$count);
                echo $script;
+               countCalc();
                echo '<div id="formPacketType">
                 <h4>Select the type of Packet</h4>
                 <form method="post" action="" class="card z-depth-1">
