@@ -3,7 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-<body>
+<body style="background-color:#232830;color:white;">
 <?php
 	$conn=mysqli_connect("localhost","root","swear@123","login");
 	if($conn)
@@ -14,7 +14,6 @@ session_start();
 			$user=$_POST["username"];
 			$password=$_POST["password"];
 			$sql="select password from users where username='".$user."'";
-			echo $sql."<br>";
 			$result=mysqli_query($conn,$sql);
 			if(mysqli_num_rows($result)>0)
 			{
@@ -23,27 +22,23 @@ session_start();
 
 					if($row["password"]==$password)
 					{
-						echo "correct credentials</br>";
-						echo "<a href='logout.php'>Logout</a><br>";
+						echo " - correct credentials</br>";
+						echo "<a href='logout.php' style='color:#26a69a'>Logout</a><br>";
 						$_SESSION["username"]=$user;
 						$_SESSION["password"]=$password;
-						echo "hello<br>";
-						$script=shell_exec('sudo ./script.sh');
-						echo $script;
-						echo "script run";
-						header('Refresh: 10, URL="display.php"');
+						header('Refresh: 1, URL="display.php"');
 					}
 					else
 					{
 						echo "wrong credentials<br>";
-						header('Refresh: 10,URL="/Network-Monitoring-Tool/"');
+						header('Refresh: 3,URL="/Network-Monitoring-Tool/"');
 					}
 				}
 			}
 			else
 			{
 				echo "wrong credentials<br>";
-				header('Refresh: 10,URL="/Network-Monitoring-Tool/"');
+				header('Refresh: 3,URL="/Network-Monitoring-Tool/"');
 			}
 		}
 	}

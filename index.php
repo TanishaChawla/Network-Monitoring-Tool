@@ -13,7 +13,8 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 	<style>
 	.card{
-	padding: 5%;}
+		padding: 5%;
+	}
 	</style>
 </head>
 <body style="background-color:#232830">

@@ -36,27 +36,44 @@
     <body>
         <a href="logout.php" class="logout">Logout</a>
         <div class="container">
-            <h4>Select the type of Packet</h4>
-            <form method="post" action="" class="card z-depth-1">
-                <input type="radio" name="packet" value="TCP" onclick="change">TCP<br>
-                <input type="radio" name="packet" value="UDP" onclick="change">UDP<br>
-                <input type="radio" name="packet" value="ARP" onclick="change" checked>ARP<br>
-                <br>
-                <select name="dropdown">
-                   <option value="timestamp">Timestamp</option>
-                   <option value="sourceaddress">Source Address</option>
-                   <option value="destinationaddress">Destination Address</option>
-                   <option value="sourceport">Source Port</option>
-                   <option value="destinationport">Destination Port</option>
-                   <option value="sourcemac">Source MAC</option>
-                   <option value="destinationmac">Destination MAC</option>
-                   <option value="length">Length</option>
-                   <option value="all">All</option>
-               </select><br>
-               <button class="waves-effect waves-light btn" type="submit" name="submit">Submit</button>
-           </form>
 
+            <h4>Capturing Packets</h4>
+            <form method="post" action="" class="card z-depth-1">
+                <label>Number of packets to be captured</label><br>
+                <input type="number" name="packet_count" value="10"><br>
+                <button class="waves-effect waves-light btn" type="submit" name="submit-before">Submit</button>
+            </form>
+
+            
            <?php
+           if(isset($_POST["submit-before"]))
+           {
+               $count = $_POST["packet_count"];
+               $script=shell_exec('sudo ./script.sh '.$count);
+               echo $script;
+               echo '<div id="formPacketType">
+                <h4>Select the type of Packet</h4>
+                <form method="post" action="" class="card z-depth-1">
+                    <input type="radio" name="packet" value="TCP" onclick="change">TCP<br>
+                    <input type="radio" name="packet" value="UDP" onclick="change">UDP<br>
+                    <input type="radio" name="packet" value="ARP" onclick="change" checked>ARP<br>
+                    <br>
+                    <select name="dropdown">
+                        <option value="timestamp">Timestamp</option>
+                        <option value="sourceaddress">Source Address</option>
+                        <option value="destinationaddress">Destination Address</option>
+                        <option value="sourceport">Source Port</option>
+                        <option value="destinationport">Destination Port</option>
+                        <option value="sourcemac">Source MAC</option>
+                        <option value="destinationmac">Destination MAC</option>
+                        <option value="length">Length</option>
+                        <option value="all">All</option>
+                    </select><br>
+                    <button class="waves-effect waves-light btn" type="submit" name="submit">Submit</button>
+                </form>
+           </div>';
+               
+           }
            if(isset($_POST["submit"]))
            {
                 $value=$_POST["packet"];

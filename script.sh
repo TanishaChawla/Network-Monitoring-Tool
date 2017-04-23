@@ -1,6 +1,6 @@
 #! /bin/bash
 #extracting packets
-tcpdump -n -c 100 > files/dump
+tcpdump -n -c $1 > files/dump
 grep "IP\s" files/dump > files/tcp
 grep "UDP" files/dump > files/udp
 grep "ARP" files/dump > files/ar
