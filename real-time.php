@@ -67,46 +67,17 @@
         <h2 class="center" style="color:white;">Network Monitoring Tool</h2>
         <div class="container center" style="color:white;">
             <div class="card z-depth-1" style="color:white;background-color:#2C323C">
-                <h4>Blocked Sources</h4><br>
-                <div class="container">
-                        <?php
-                            if(isset($_POST["submit-unblock"])){
-                                $unblock = $_POST["unblock-request"];
-                                echo "UNBLOCKED THE SOURCE - ".$unblock;
-                                $DELETE = $unblock;
-                                $data = file("blocked.txt");
-                                $out = array();
-                                foreach($data as $line) {
-                                    if(trim($line)!=$DELETE) {
-                                        $out[] = $line;
-                                    }
-                                }
-                                $fp = fopen("blocked.txt", "w+");
-                                flock($fp, LOCK_EX);
-                                foreach($out as $line) {
-                                    fwrite($fp, $line);
-                                }
-                                flock($fp, LOCK_UN);
-                                fclose($fp);
-                                echo 'sudo ufw allow from '.$unblock;
-                                $script=shell_exec('sudo ufw allow from '.$unblock);
+                <div class="container"><h4>Realtime Analysis</h4></div>
+                <form action="" method="POST"><input type="number" hidden name="isStarted" value="1"><button type="submit" class="waves-effect waves-light btn" name="submit-start" id="startButton">Start</button></form>
 
-                                echo '<br>'.$script;
-                            }
-                            echo '<table class="striped" style="text-align:center;" >
-                                <thead style="background-color:#e26161"><tr><th style="text-align:center;">Source Address</th><th style="text-align:center;">Unblock</th></tr></thead>';
-                            $file="blocked.txt";
-                            $handle = fopen($file, "r");
-                            while(!feof($handle)){
-                                $sourceAddress = fgets($handle);
-                                if($sourceAddress!="")
-                                    echo "<td style='text-align:center;'>".$sourceAddress."</td><td style='text-align:center;'><form action = './status.php' method='POST'><input hidden type='text' value=".$sourceAddress." name='unblock-request'><button type='submit' class='waves-effect waves-light btn' name='submit-unblock'>Unblock</button></form></td></tr>";
-                            }
-                            fclose($handle);
+                <?php
+                    if(isset($_POST["submit-start"])){
+                        $isstarted = $_POST["isStarted"];
+                        echo '<script>document.getElementById("startButton").style.display="none"</script>';
+                        echo '<form action="" method="POST"><input type="number" hidden name="isStarted" value="0"><button type="submit" class="waves-effect waves-light btn" name="submit-start" id="startButton" style="background-color:#e26161">Stop</button></form>';
+                    }
+                ?>
 
-                        ?>
-                    </table>
-                </div>
             </div>
         </div>
 
@@ -123,7 +94,7 @@
         </footer>
 
         <script>
-            document.getElementById("statusSelector").style.background="#26a69a";
+            document.getElementById("rtSelector").style.background="#26a69a";
         </script>
 
 </body>

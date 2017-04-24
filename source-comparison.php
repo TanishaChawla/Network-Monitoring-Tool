@@ -75,7 +75,7 @@
                 <div class="center" style="padding-top:25px;text-align:center"><div id="loading" class="loader" style="display: inline-block;"></div></div>
             </form>
 
-        <div class="card z-depth-1" style="background-color:#2C323C">
+            <div class="card z-depth-1" style="background-color:#2C323C">
 
             <?php
             if(isset($_POST["submit-block"]))
@@ -175,7 +175,7 @@
                 echo '<script>document.getElementById("loading").style.display="none";</script>';
             }
             ?>
-        </div>
+            </div>
         </div>
 
         <footer style="background-color:#3a4556;box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.3);">
@@ -183,7 +183,8 @@
                 <div class="row">
                     <a href="display.php" style="display:block;color:white;"><div id="homeSelector" class="col s3 m1 l1 center" style="padding:14px;">Home</div></a>
                     <a href="status.php" style="display:block;color:white;"><div id="statusSelector" class="col s3 m1 l1 center" style="padding:14px;">Status</div></a>
-                    <a href="source-comparison.php" style="display:block;color:white;"><div id="scSelector" class="col s3 m2 l2" style="padding:14px;">Source Comparison</div></a>
+                    <a href="source-comparison.php" style="display:block;color:white;"><div id="scSelector" class="col s3 m2 l1" style="padding:14px;">Comparison</div></a>
+                    <a href="real-time.php" style="display:block;color:white;"><div id="rtSelector" class="col s3 m2 l2" style="padding:14px;">Realtime Analysis</div></a>
                     <div class="right" style="padding:14px;color:"><a href="logout.php">Logout</a></div>
                 </div>
             </div>
