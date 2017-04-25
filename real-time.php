@@ -8,11 +8,8 @@
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" media="screen,projection" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
     <style>
             .card{
                 padding: 5%;
@@ -68,16 +65,8 @@
         <div class="container center" style="color:white;">
             <div class="card z-depth-1" style="color:white;background-color:#2C323C">
                 <div class="container"><h4>Realtime Analysis</h4></div>
-                <form action="" method="POST"><input type="number" hidden name="isStarted" value="1"><button type="submit" class="waves-effect waves-light btn" name="submit-start" id="startButton">Start</button></form>
-
-                <?php
-                    if(isset($_POST["submit-start"])){
-                        $isstarted = $_POST["isStarted"];
-                        echo '<script>document.getElementById("startButton").style.display="none"</script>';
-                        echo '<form action="" method="POST"><input type="number" hidden name="isStarted" value="0"><button type="submit" class="waves-effect waves-light btn" name="submit-start" id="startButton" style="background-color:#e26161">Stop</button></form>';
-                    }
-                ?>
-
+                <form action="" method="POST"><input type="number" hidden name="isStarted" value="1"><button type="" class="waves-effect waves-light btn" name="submit-start" id="startButton" onclick="startExecution()">Start</button></form>
+                <p id="elementsDisplayedHere"></p>
             </div>
         </div>
 
@@ -95,6 +84,9 @@
 
         <script>
             document.getElementById("rtSelector").style.background="#26a69a";
+            function startExecution(){
+                
+            }
         </script>
 
 </body>

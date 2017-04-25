@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <style>
             .card{
@@ -173,10 +175,82 @@
                 }
                 echo '</table>';
                 echo '<script>document.getElementById("loading").style.display="none";</script>';
+                echo '
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load("current", {"packages":["corechart"]});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn("string", "Topping");
+        data.addColumn("number", "Slices");
+        data.addRows([
+          ["'.rtrim($sources[0]).'",'.$noofpackets[0].'],
+          ["'.rtrim($sources[1]).'",'.$noofpackets[1].'],
+          ["'.rtrim($sources[2]).'",'.$noofpackets[2].'],
+          ["'.rtrim($sources[3]).'",'.$noofpackets[3].'],
+          ["'.rtrim($sources[4]).'",'.$noofpackets[4].'],
+          ["'.rtrim($sources[5]).'",'.$noofpackets[5].'],
+          ["'.rtrim($sources[6]).'",'.$noofpackets[6].'],
+          ["'.rtrim($sources[7]).'",'.$noofpackets[7].'],
+          ["'.rtrim($sources[8]).'",'.$noofpackets[8].'],
+          ["'.rtrim($sources[9]).'",'.$noofpackets[9].']
+        ]);
+
+        // Set chart options
+        var options = {"title":"Source Comparison",
+                       "width":800,
+                       "height":800,
+                       "backgroundColor": "#232830",
+                       "is3D":true,
+                       "textColor": "#e1e1e1",
+                       "color": "#e1e1e1",
+                       "titleTextStyle": {
+                            "color": "#e1e1e1"
+                        },
+                        "hAxis": {
+                            "textStyle": {
+                                "color": "#e1e1e1"
+                            },
+                            "titleTextStyle": {
+                                "color": "#e1e1e1"
+                            }
+                        },
+                        "vAxis": {
+                            "textStyle": {
+                                "color": "#e1e1e1"
+                            },
+                            "titleTextStyle": {
+                                "color": "#e1e1e1"
+                            }
+                        },
+                        "legend": {
+                            "textStyle": {
+                                "color": "#e1e1e1"
+                            }
+                        }
+                    };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById("chart_div"));
+        chart.draw(data, options);
+      } 
+    </script>';
             }
             ?>
             </div>
         </div>
+
+        <div class="container"><div id="chart_div" class="offset-s2" style="background-color:#232830;color:white;"></div></div>
 
         <footer style="background-color:#3a4556;box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.3);">
             <div class="container" style="color:white;">
@@ -184,7 +258,6 @@
                     <a href="display.php" style="display:block;color:white;"><div id="homeSelector" class="col s3 m1 l1 center" style="padding:14px;">Home</div></a>
                     <a href="status.php" style="display:block;color:white;"><div id="statusSelector" class="col s3 m1 l1 center" style="padding:14px;">Status</div></a>
                     <a href="source-comparison.php" style="display:block;color:white;"><div id="scSelector" class="col s3 m2 l1" style="padding:14px;">Comparison</div></a>
-                    <a href="real-time.php" style="display:block;color:white;"><div id="rtSelector" class="col s3 m2 l2" style="padding:14px;">Realtime Analysis</div></a>
                     <div class="right" style="padding:14px;color:"><a href="logout.php">Logout</a></div>
                 </div>
             </div>

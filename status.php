@@ -116,7 +116,6 @@
                     <a href="display.php" style="display:block;color:white;"><div id="homeSelector" class="col s3 m1 l1 center" style="padding:14px;">Home</div></a>
                     <a href="status.php" style="display:block;color:white;"><div id="statusSelector" class="col s3 m1 l1 center" style="padding:14px;">Status</div></a>
                     <a href="source-comparison.php" style="display:block;color:white;"><div id="scSelector" class="col s3 m2 l1" style="padding:14px;">Comparison</div></a>
-                    <a href="real-time.php" style="display:block;color:white;"><div id="rtSelector" class="col s3 m2 l2" style="padding:14px;">Realtime Analysis</div></a>
                     <div class="right" style="padding:14px;color:"><a href="logout.php">Logout</a></div>
                 </div>
             </div>
